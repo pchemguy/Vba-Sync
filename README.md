@@ -26,7 +26,7 @@ At this point, I believe the code for this module is essentially complete. While
     
     Private QueryableArr(2) As cQueryable
     
-    Sub AsyncQueryExample()
+    Sub AsyncQueryExample1()
         Dim ConnectionString As String
         Dim i As Long
         
@@ -67,7 +67,9 @@ At this point, I believe the code for this module is essentially complete. While
 
     Private queryable As cQueryable
     
-    Sub subby()
+    'this is a normal code module
+    
+    Sub AsyncQueryExample2()
         
         Set queryable = New cQueryable
         
