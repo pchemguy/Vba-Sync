@@ -1,6 +1,6 @@
 # VBA-Sync
 
-In VBA, asynchronous queries require a class module, a unique ADODB.Command object, a unique ADODB.Connection object, and a unique user-defined event linked to the ADODB.Conection object. This class module abstracts away the complicated and boilerplate code of executing asynchronous queries to a database in VBA. 
+In VBA, to use asynchronous queries you need an object module or a class module, an ADODB.Connection object, and a user-defined event linked to the ADODB.Conection object. While this is not that much code in itself, it is limited. It is not capable of supporting queries that utilize ordinal parameters. For that, you also need an ADODB.Command object and an ADODB.Parameter object for ordinal argument you have. So this class module abstracts away the complicated and boilerplate code of executing asynchronous queries to a database in VBA. 
 
 Although this class is mainly designed for executing asynchronous queries, it is capable of executing synchronous queries as well. This functionality can be useful if you need to do something like run a SQL package to populate various temp tables. That query must be executed synchronously because the temp tables must be populated before any select queries can be executed on them. Once these temp tables are populated, any select queries that query them can be run asynchronously.
 
@@ -12,13 +12,9 @@ As I noted in the code, the class modules requires a reference to the Microsoft 
 
 NOTE: cQueryable variables must be declared with module-level scope. While synchronous queries may work with local scope, asynchronous queries will not. So in the normal module that you write your executable code, ensure that any cQueryable variables you create have module-level scope.
 
-## Current limitations / future features
-
-cQueryable does not have extensive error handling. I do not currently check whether the connection string you've provided is valid, or whether you've provided a query to the SQL property for example. If these things are not provided, the program will crash, but no detailed, custom error will be provided. I will likely implement custom errors in a future release.
-
 ## A note on support
 
-Be aware that I have limited time for feature requests or bug fixes. And even if I have some time to do those things now, I may not in the future. Also be aware that while this code works for me, it has not been extensively tested. I would recommend extensive testing if you plan on using this code in a production environment to ensure it works and fits your needs.
+At this point, I believe the code for this module is essentially complete. While the code utilizes some limited error handling, be aware that I have limited time for feature requests or bug fixes. And even if I have some time to do those things now, I may not in the future. Also be aware that while this code works for me, it has not been extensively tested. I would recommend extensive testing if you plan on using this code in a production environment to ensure it works and fits your needs.
 
 ## Example
 
