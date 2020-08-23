@@ -43,8 +43,8 @@ Be aware that I have limited time for feature requests or bug fixes. And even if
         QueryableArr(1).Sql = "Select * from sales.invoices"
         QueryableArr(2).Sql = "select * from sales.rates"
         
-        QueryableArr(1).procedureAfterQuery = "updateSheet1"
-        QueryableArr(2).procedureAfterQuery = "updateSheet2"
+        QueryableArr(1).AsyncProcedure = "updateSheet1"
+        QueryableArr(2).AsyncProcedure = "updateSheet2"
         
         QueryableArr(0).AsyncExecute
         QueryableArr(1).AsyncExecute
