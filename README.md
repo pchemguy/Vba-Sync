@@ -14,7 +14,7 @@ As I noted in the code, **the class modules requires a reference to the Microsof
 
 ## Untested usage
 
-This code was developed to be utilized on SQL queries to a database. And this scenario is what I've tested. Under the hood though, it just utilizes the objects in the ADODB library. Since ADODB can connect to a variety of data sources provided that a driver is supplied, it should be able to be utilized in situations other than SQL queries to a database (e.g. queries to a CSV, an Excel file, etc.) However, this is out of the scope of the project and not something I have tested. Part of the reasons for this is that finding the connection strings for the different data sources can be a pain. Not only do you need to find the correct one, but the one you need to use may vary depending on whether you're in a 32 bit or 64 bit environment.
+This code was developed to be utilized on SQL queries to a database. And this scenario is what I've tested. Under the hood though, it just utilizes the objects in the ADODB library. Since ADODB can connect to a variety of data sources provided that a driver is supplied, it should be able to be utilized in situations other than SQL queries to a database (e.g. queries to a CSV file, an Excel file, etc.) However, this is out of the scope of the project and not something I have tested. Part of the reasons for this is that finding the connection strings for the different data sources can be a pain. Not only do you need to find the correct one, but the one you need to use may vary depending on whether you're in a 32 bit or 64 bit environment.
 
 ## A note on support
 
