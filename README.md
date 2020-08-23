@@ -16,7 +16,9 @@ NOTE: cQueryable variables must be declared with **module-level scope**. While s
 
 At this point, I believe the code for this module is essentially complete. While the code utilizes some limited error handling, be aware that I have limited time for feature requests or bug fixes. And even if I have some time to do those things now, I may not in the future. Also be aware that while this code works for me, it has not been extensively tested. I would recommend extensive testing if you plan on using this code in a production environment to ensure it works and fits your needs.
 
-## Example
+# Examples
+
+## Synchronous and asynchronous queries
 
     Option Explicit
     
@@ -58,5 +60,23 @@ At this point, I believe the code for this module is essentially complete. While
         With Sheet2.Range("A1")
             .ClearContents
             .CopyFromRecordset rs
+        End With
+    End Sub
+
+## Ordinal parameters
+
+    Private queryable As cQueryable
+    
+    Sub subby()
+        
+        Set queryable = New cQueryable
+        
+        With queryable
+            .ConnectionString = "Dsn=MyDsn"
+            .Sql = "select * from company.customers where first_name = ? and age > ?"
+            .createParam "firstName", adVarChar, "John", pSize:=50
+            .createParam "age", adInteger, 30
+            .AsyncProcedure = "updateSheet1"
+            .AsyncExecute
         End With
     End Sub
