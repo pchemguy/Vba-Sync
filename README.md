@@ -69,6 +69,8 @@ At this point, I believe the code for this module is essentially complete. While
 
 ### Ordinal parameters query
 
+    Option Explicit
+
     Private queryable As cQueryable
     
     'this is a normal code module
