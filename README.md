@@ -10,7 +10,7 @@ I've named the class module cQuerable, but you can name it whatever you want. If
 
 As I noted in the code, **the class modules requires a reference to the Microsoft ActiveX Data Objects 6.1 library.** It will not work without a reference to that library or a similar one (I've only tested on the 6.1 library.)
 
-**NOTE:** cQueryable variables must be declared with **module-level scope**. While synchronous queries may work with local scope, asynchronous queries will not. So in the normal module that you write your executable code, ensure that any cQueryable variables you create have module-level scope.
+**NOTE:** cQueryable variables must be declared with **module-level scope** (please see the examples section if you aren't sure what I mean by this.) While synchronous queries may work with local scope, asynchronous queries will not. So in the normal module that you write your executable code, ensure that any cQueryable variables you create have module-level scope.
 
 ## Untested usage
 
