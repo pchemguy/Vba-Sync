@@ -82,6 +82,7 @@ At this point, I believe the code for this module is essentially complete. While
             .Sql = "select * from company.customers where first_name = ? and age > ?"
             .createParam "firstName", adVarChar, "John", pSize:=50
             .createParam "age", adInteger, 30
+            'Note: updateSheet1 procedure is in earlier example
             .AsyncProcedure = "updateSheet1"
             .AsyncExecute
         End With
