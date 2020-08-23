@@ -8,9 +8,13 @@ Although this class is mainly designed for executing asynchronous queries, it is
 
 I've named the class module cQuerable, but you can name it whatever you want. If you don't name it as cQueryable, you have to create an instance of whatever you decide to name it in order to use it. All of my examples will assume a cQueryable class module name.
 
-As I noted in the code, the class modules requires a reference to the Microsoft ActiveX Data Objects 6.1 library. It will not work without a reference to that library or a similar one (I've only tested on the 6.1 library.)
+As I noted in the code, **the class modules requires a reference to the Microsoft ActiveX Data Objects 6.1 library.** It will not work without a reference to that library or a similar one (I've only tested on the 6.1 library.)
 
 **NOTE:** cQueryable variables must be declared with **module-level scope**. While synchronous queries may work with local scope, asynchronous queries will not. So in the normal module that you write your executable code, ensure that any cQueryable variables you create have module-level scope.
+
+## Untested usage
+
+This code was developed to be utilized on SQL queries to a database. Under the hood though, it just utilizes the objects in the ADODB library. Since ADODB can connect to a variety of data sources provided that a driver is supplied, it should be able to be utilized in situations other than SQL queries to a database. However, this is out of the scope of the project and not something I have tested. Part of the reasons for this is that finding the connection strings for the different data sources can be a pain. Not only do you need to find the correct one, but the one you need to use may vary depending on whether you're in a 32 bit or 64 bit environment.
 
 ## A note on support
 
@@ -63,7 +67,7 @@ At this point, I believe the code for this module is essentially complete. While
         End With
     End Sub
 
-## Ordinal parameters
+## Ordinal parameters query
 
     Private queryable As cQueryable
     
