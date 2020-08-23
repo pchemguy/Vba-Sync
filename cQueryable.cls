@@ -17,11 +17,12 @@ Private mSyncConn As ADODB.Connection
 Private mConn As ADODB.Connection
 Private mComm As ADODB.Command
 Private mSql As String
-Private mProcedureAfterQuery As String
-Private mAsync As Boolean
+Private mAsyncProcedure As String
 Private mConnectionString As String
 
 Private Const mSyncExecute As Long = -1
+Private Const mConnectionUnsuccessfulError As Long = vbObjectError + 513
+Private Const mEmptyAsyncProcedureError As Long = vbObject + 514
 
 Private Sub Class_Initialize()
     Set mComm = New ADODB.Command
@@ -44,15 +45,15 @@ Public Property Get ConnectionString() As String
     ConnectionString = mConnectionString
 End Property
 
-Public Property Let procedureAfterQuery(value As String)
-    mProcedureAfterQuery = value
+Public Property Let AsyncProcedure(value As String)
+    mAsyncProcedure = value
 End Property
 
-Public Property Get procedureAfterQuery() As String
-    procedureAfterQuery = mProcedureAfterQuery
+Public Property Get AsyncProcedure() As String
+    AsyncProcedure = mAsyncProcedure
 End Property
 
-Public Sub createParam(pName As String, pType As DataTypeEnum, pValue As Variant, Optional pDirection As ParameterDirectionEnum = adParamInput, Optional pSize As Long = 0)
+Public Sub createParam(pName As String, pType As DataTypeEnum, pValue As Variant, Optional pSize As Long = 0, Optional pDirection As ParameterDirectionEnum = adParamInput)
     Dim pm As ADODB.Parameter
     With mComm
        Set pm = .CreateParameter(name:=pName, Type:=pType, direction:=pDirection, value:=pValue, size:=pSize)
@@ -72,13 +73,17 @@ Public Function SyncExecute()
 End Function
 
 Public Sub AsyncExecute()
-    Set mASyncConn = mConn
-    If connectionSuccessful Then
-        With mComm
-            .CommandText = mSql
-            Set .ActiveConnection = mASyncConn
-            .execute Options:=adAsyncExecute
-        End With
+    If Me.AsyncProcedure <> "" Then
+        Set mASyncConn = mConn
+        If connectionSuccessful Then
+            With mComm
+                .CommandText = mSql
+                Set .ActiveConnection = mASyncConn
+                .execute Options:=adAsyncExecute
+            End With
+        End If
+    Else
+        Call Err.Raise(Number:=mEmptyAsyncProcedureError, Description:="AsyncProcedure property not set")
     End If
 End Sub
 
@@ -91,18 +96,15 @@ Private Function connectionSuccessful() As Boolean
         If mConn.State = adStateClosed Then
             mConn.Open
         End If
-    
         connectionSuccessful = (mConn.State = adStateOpen)
     On Error GoTo 0
     
     Exit Function
 errHandler:
-    Debug.Print "Error: Connection unsuccessful"
     connectionSuccessful = False
+    Call Err.Raise(Number:=mConnectionUnsuccessfulError, Description:="Database connection unsuccessful")
 End Function
 
 Private Sub mASyncConn_ExecuteComplete(ByVal RecordsAffected As Long, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pCommand As ADODB.Command, ByVal pRecordset As ADODB.Recordset, ByVal pConnection As ADODB.Connection)
-    If mProcedureAfterQuery <> "" Then
-        Call Application.Run(mProcedureAfterQuery, pRecordset)
-    End If
+    Call Application.Run(mAsyncProcedure, pRecordset)
 End Sub
