@@ -62,7 +62,7 @@ At this point, I believe the code for this module is essentially complete. While
     
     Private Sub updateSheet2(rs As ADODB.Recordset)
         With Sheet2.Range("A1")
-            .ClearContents
+            .CurrentRegion.ClearContents
             .CopyFromRecordset rs
         End With
     End Sub
