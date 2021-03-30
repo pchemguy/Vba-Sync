@@ -48,7 +48,7 @@ At this point, I believe the code for this module is essentially complete. While
         QueryableArr(1).AsyncProcedure = "updateSheet1"
         QueryableArr(2).AsyncProcedure = "updateSheet2"
         
-        QueryableArr(0).AsyncExecute
+        QueryableArr(0).SyncExecute
         QueryableArr(1).AsyncExecute
         QueryableArr(2).AsyncExecute
     End Sub
