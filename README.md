@@ -18,7 +18,7 @@ This code was developed to be utilized on SQL queries to a database. And this sc
 
 ## A note on support
 
-At this point, I believe the code for this module is essentially complete. While the code utilizes some limited error handling, be aware that I have limited time for feature requests or bug fixes. And even if I have some time to do those things now, I may not in the future. Also be aware that while this code works for me, it has not been extensively tested. I would recommend extensive testing if you plan on using this code in a production environment to ensure it works and fits your needs.
+At this point, I believe the code for this module is essentially complete. While this code may not do everything you'd like, please understand that I may have limited time for feature requests. And even if I have some time to do those things now, I may not in the future. Also be aware that while this code works for me, it has not been extensively tested. I would recommend exercising care in using this code if you plan on using it in a production environment.
 
 ## Examples
 
